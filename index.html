@@ -338,7 +338,7 @@
 })(window);
 
 var vis = {},
-    cat = 'Right'
+    cat = 'Major Sector'
     ;
 
 var setting = {
@@ -389,7 +389,7 @@ var shortTimeFormat = (function() {
     }
 })();
 
-var ONE_SECOND = 1000*5,
+var ONE_SECOND = 10,
     stepDate = 24 * 60 * 60 * 1000
 ;
 
@@ -713,7 +713,6 @@ var ONE_SECOND = 1000*5,
     }
 
     function getNodeFromPos(pos) {
-    	debugger;
         for (var i = nodes.length - 1; i >= 0; i--) {
             var d = nodes[i];
             if (d.visible && contain(d, pos))
@@ -723,6 +722,7 @@ var ONE_SECOND = 1000*5,
     }
 
     function node(d, type) {
+
         var c = type == typeNode.child ? d[cat] : baseColor(d.key),
             ext, x, y,
             w2 = _w/2,
@@ -797,7 +797,6 @@ var ONE_SECOND = 1000*5,
     }
 
     function getBase(d) {
-    	debugger;
         if (!d || !d.parent)
             return null;
 
@@ -829,10 +828,8 @@ var ONE_SECOND = 1000*5,
     }
 
     function initNodes(data) {
-    	debugger;
         var ns = [],
                 i, j, n, d, df;
-        debugger;
         parentHash = d3.map({});
         childHash = d3.map({});
         extHash = d3.map({});
@@ -844,9 +841,6 @@ var ONE_SECOND = 1000*5,
                 d = data[i];
                 if (!d) continue;
                 d.nodes = [];
-
-                debugger;
-                
                 n = getBase(d);
                 d.parentNode = n;
                 !n.inserted && (n.inserted = ns.push(n));
@@ -1454,17 +1448,30 @@ var ONE_SECOND = 1000*5,
 
     function lme(d) {
         selectedExt = d.value;
+        debugger;
+        var text = "";
+        if (!d.h.localeCompare('Expression'))
+        	text = "Express";
+        else if (!d.h.localeCompare('Access'))
+        	text = "Accesss";
+        else if (!d.h.localeCompare('Openness'))
+        	text = "Opennessss";
+        else if (!d.h.localeCompare('Innovation'))
+        	text = "Innovation";
+        else if (!d.h.localeCompare('Privacy'))
+        	text = "Privacyy";
 
         tooltip.html([
             "<b style='text-shadow: 1px 1px 1px #000; color:",
             d.value.color,
             "'>", d.key, "</b>",
             "<hr>",
-            "Number of contract: <b>",
+            "Number of violations: <b>",
             d.value.now.length,
-            "</b><br/>Money ($): <b>",
-            th(d3.sum(d3.values(d.value.values))),
-            "M.</b><br/>"
+            "</b>",
+            "Digital Right: <b>",
+            d.value.now.length,
+            "</b>"
         ].join(''));
         tooltip.style("display", "block");
         updateLegend();
@@ -1593,8 +1600,8 @@ var ONE_SECOND = 1000*5,
     }
 
     var tooltip;
-    
     function showToolTip(d) {
+
         var res;
         if (!d) {
             tooltip.style("display", "none");
@@ -1605,17 +1612,17 @@ var ONE_SECOND = 1000*5,
 
             if (d.type == typeNode.parent) {
                 res = [
-                    d.img && d.img.width > 0 && d.img.height > 0 ? d.img.outerHTML : "",
-                    " Country: <b>",
-                    d.nodeValue.shortName,
+                    //d.img && d.img.width > 0 && d.img.height > 0 ? d.img.outerHTML : "",
+                    " Country Code: <b>",
+                    d.nodeValue.key,
                     "</b><br/>"
                 ];
             }
             else {
                 res = [
-                       "C: <b>",
-                       d.nodeValue.country1,
-                       "</b>"
+                       "Link: ",
+                       d.nodeValue['Product line'],
+                       //"</b>"
                    ];
                }
 
@@ -1624,77 +1631,78 @@ var ONE_SECOND = 1000*5,
            }
        }
 
-/*
+// /*
+//     function showToolTip(d) {
 
-    function showToolTip(d) {
-        var res;
-        if (!d) {
-            tooltip.style("display", "none");
-            return;
-        }
-        if (tooltip.style("display") == "none") {
-            res = [];
+//         var res;
+//         if (!d) {
+//             tooltip.style("display", "none");
+//             return;
+//         }
+//         if (tooltip.style("display") == "none") {
+//             res = [];
 
-            if (d.type == typeNode.parent) {
-                res = [
-                    d.img && d.img.width > 0 && d.img.height > 0 ? d.img.outerHTML : "",
-                    " Country: <b>",
-                    d.nodeValue.shortName,
-                    "</b><hr/>Supplied ($): <b>",
-                    th(d.nodeValue.supplied),
-                    "M.</b><br/>Borrowed ($): <b>",
-                    th(d.nodeValue.borrowed),
-                    "M.</b><br/>"
-                ];
-            }
-            else {
-                res = [
-                    "C: <b>",
-                    d.nodeValue.contract.desc,
-                    "</b><br/>Date: <b>",
-                    shortTimeFormat(d.nodeValue.contract.date),
-                    "</b><hr/>Project: <b>",
-                    "(", d.nodeValue.project.id, ") ",
-                    d.nodeValue.project.name,
-                    "</b><br/>Product line: <b",
-                    cat == "Product line" ? ' style="text-shadow: 0 0 2px rgba(0, 0, 0, .8);color:' + extColor(d.nodeValue[cat]) + '"' : "",
-                    ">",
-                    d.nodeValue.product,
-                    "</b><br/>Major Sector: <b",
-                    cat == "Major Sector" ? ' style="text-shadow: 0 0 2px rgba(0, 0, 0, .8);color:' + extColor(d.nodeValue[cat]) + '"' : "",
-                    ">",
-                    d.nodeValue.sector,
-                    "</b><hr/>Procurement: <b>",
-                    "</b><br/>• Type: <b",
-                    cat == "Procurement Type" ? ' style="text-shadow: 0 0 2px rgba(0, 0, 0, .8);color:' + extColor(d.nodeValue[cat]) + '"' : "",
-                    ">",
-                    d.nodeValue.procurement.type,
-                    "</b><br/>• Method: <b",
-                    cat == "Procurement Method" ? ' style="text-shadow: 0 0 2px rgba(0, 0, 0, .8);color:' + extColor(d.nodeValue[cat]) + '"' : "",
-                    ">",
-                    d.nodeValue.procurement.method,
-                    "</b><br/>• Category: <b",
-                    cat == "Procurement Category" ? ' style="text-shadow: 0 0 2px rgba(0, 0, 0, .8);color:' + extColor(d.nodeValue[cat]) + '"' : "",
-                    ">",
-                    d.nodeValue.procurement.category,
-                    "</b><hr/>Region: <b>",
-                    d.nodeValue.Region,
-                    "</b><br/>Supplier: <b>",
-                    d.nodeValue.supplier.name,
-                    "</b><br/>Borrower: <b>",
-                    d.nodeValue.borrower.name,
-                    "</b><br/>Borrowed ($): <b>",
-                    th(+d.nodeValue),
-                    "M.</b><br/>"
-                ];
-            }
+//             if (d.type == typeNode.parent) {
+//                 res = [
+//                     d.img && d.img.width > 0 && d.img.height > 0 ? d.img.outerHTML : "",
+//                     " Country: <b>",
+//                     d.nodeValue.shortName,
+//                     "</b><hr/>Supplied ($): <b>",
+//                     th(d.nodeValue.supplied),
+//                     "M.</b><br/>Borrowed ($): <b>",
+//                     th(d.nodeValue.borrowed),
+//                     "M.</b><br/>"
+//                 ];
+//             }
+//             else {
+//                 res = [
+//                     "C: <b>",
+//                     d.nodeValue.contract.desc,
+//                     "</b><br/>Date: <b>",
+//                     shortTimeFormat(d.nodeValue.contract.date),
+//                     "</b><hr/>Project: <b>",
+//                     "(", d.nodeValue.project.id, ") ",
+//                     d.nodeValue.project.name,
+//                     "</b><br/>Product line: <b",
+//                     cat == "Product line" ? ' style="text-shadow: 0 0 2px rgba(0, 0, 0, .8);color:' + extColor(d.nodeValue[cat]) + '"' : "",
+//                     ">",
+//                     d.nodeValue.product,
+//                     "</b><br/>Major Sector: <b",
+//                     cat == "Major Sector" ? ' style="text-shadow: 0 0 2px rgba(0, 0, 0, .8);color:' + extColor(d.nodeValue[cat]) + '"' : "",
+//                     ">",
+//                     d.nodeValue.sector,
+//                     "</b><hr/>Procurement: <b>",
+//                     "</b><br/>• Type: <b",
+//                     cat == "Procurement Type" ? ' style="text-shadow: 0 0 2px rgba(0, 0, 0, .8);color:' + extColor(d.nodeValue[cat]) + '"' : "",
+//                     ">",
+//                     d.nodeValue.procurement.type,
+//                     "</b><br/>• Method: <b",
+//                     cat == "Procurement Method" ? ' style="text-shadow: 0 0 2px rgba(0, 0, 0, .8);color:' + extColor(d.nodeValue[cat]) + '"' : "",
+//                     ">",
+//                     d.nodeValue.procurement.method,
+//                     "</b><br/>• Category: <b",
+//                     cat == "Procurement Category" ? ' style="text-shadow: 0 0 2px rgba(0, 0, 0, .8);color:' + extColor(d.nodeValue[cat]) + '"' : "",
+//                     ">",
+//                     d.nodeValue.procurement.category,
+//                     "</b><hr/>Region: <b>",
+//                     d.nodeValue.Region,
+//                     "</b><br/>Supplier: <b>",
+//                     d.nodeValue.supplier.name,
+//                     "</b><br/>Borrower: <b>",
+//                     d.nodeValue.borrower.name,
+//                     "</b><br/>Borrowed ($): <b>",
+//                     th(+d.nodeValue),
+//                     "M.</b><br/>"
+//                 ];
+//             }
 
-            tooltip.html(res.join(''));
-            tooltip.style("display", "block");
-        }
-    }
+//             tooltip.html(res.join(''));
+//             tooltip.style("display", "block");
 
-*/
+//     }
+//         }
+// */
+
 
     function moveToolTip(d, event) {
         event = event || d3.event;
@@ -1721,10 +1729,8 @@ var ONE_SECOND = 1000*5,
             }
         }
         else {
-        	debugger;
             d = getNodeFromPos(d3.mouse(item));
         }
-
         if (d) {
             selected = d;
             d.fixed |= 4;
@@ -1894,7 +1900,6 @@ var ONE_SECOND = 1000*5,
 		
         links = d3.map({});
         regionLinks = [];
-        debugger;
         nodes = initNodes(_data);
 
         _force = (_force || d3.layout.force()
@@ -1955,7 +1960,7 @@ var ONE_SECOND = 1000*5,
 (function() {
     var w, h,
         _data,
-        fy = 2006,
+        fy = 2007,
         div
     ;
 
@@ -2012,8 +2017,7 @@ var ONE_SECOND = 1000*5,
 
     // return object country
     function initCounty(key, value) {
-    	debugger;
-        var c = countries[key] || ( countries[key] = {        		
+        var c = countries[key] || ( countries[key] = {
             key: key,
             name: value,
             shortName: value.split(',')[0],
@@ -2053,7 +2057,7 @@ var ONE_SECOND = 1000*5,
         return countryByIndex[c.id] = c;
     }
     
-    /*
+    
     function initProcurement(d) {
         return {
             category : d['Procurement Category'],
@@ -2078,13 +2082,14 @@ var ONE_SECOND = 1000*5,
             }
         });
     }
-    */
 
     function value() {
         return this.basevalue || 0;
     }
     
+    /*
     function initItem(d) {
+    	d.value = d.basevalue = 100;
         d.valueOf = value;
     	d.country1 = initCounty(d["CountryCode1"], d["Country1"]);
     	d.country2 = initCounty(d["CountryCode2"], d["Country2"]);
@@ -2093,14 +2098,17 @@ var ONE_SECOND = 1000*5,
     	d.right = d["Right"];
     	d.date = Date.parse(d['ReportedOn']);
     	return d;
-    }
+    }*/
 
-    /*
+    
     function initItem(d) {
         // Convert strings to numbers.
         d.value = d.basevalue = parseInt(d["Total Contract Amount (USD)"].substring(1));
         d.valueOf = value;
 
+        //d.country1 = initCounty(d["CountryCode1"], d["Country1"]);
+    	//d.country2 = initCounty(d["CountryCode2"], d["Country2"]);
+    	//d.right = "Test";
         d.borrower = initCounty(d["Borrower Country Code"], d["Borrower Country"]);
         d.borrower.borrowed += d.value;
         d.supplier = initCounty(d["Supplier Country Code"], d["Supplier Country"]);
@@ -2117,7 +2125,6 @@ var ONE_SECOND = 1000*5,
 
         return d;
     }
-    */
 
     function clone(d) {
         var newItem = {};
@@ -2204,7 +2211,6 @@ var ONE_SECOND = 1000*5,
             .scaleExtent([h / 6, h])
         ;
 
-        debugger;
         feature.attr("d", path);
 
         fsvg.selectAll("circle").remove();
@@ -2231,12 +2237,10 @@ var ONE_SECOND = 1000*5,
         );
 
         vis.pb.width(w).height(18).textPosition("middle").max(0);
-		
-        
+
         imgPreloader.hide();
 
         setting.zoom = zoom;
-
         vis.runShow(_data, div, w, h, setting);
         btnPause.show();
         btnStop.show();
