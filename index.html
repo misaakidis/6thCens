@@ -1448,30 +1448,28 @@ var ONE_SECOND = 10,
 
     function lme(d) {
         selectedExt = d.value;
-        debugger;
-        var text = "";
-        if (!d.h.localeCompare('Expression'))
-        	text = "Express";
-        else if (!d.h.localeCompare('Access'))
-        	text = "Accesss";
-        else if (!d.h.localeCompare('Openness'))
-        	text = "Opennessss";
-        else if (!d.h.localeCompare('Innovation'))
-        	text = "Innovation";
-        else if (!d.h.localeCompare('Privacy'))
-        	text = "Privacyy";
+        var text = "help";
+        if (!d.key.localeCompare('Expression'))
+        	text = "Don't censor the Internet.";
+        else if (!d.key.localeCompare('Access'))
+        	text = "Promote universal access to fast and affordable networks.";
+        else if (!d.key.localeCompare('Openness'))
+        	text = "Keep the Internet an open network where everyone is free to connect, communicate, write, read, watch, speak, listen, learn, create and innovate.";
+        else if (!d.key.localeCompare('Innovation'))
+        	text = "Protect the freedom to innovate and create without permission. Don’t block new technologies and don’t punish innovators for their users' actions.";
+        else if (!d.key.localeCompare('Privacy'))
+        	text = "Protect privacy and defend everyone’s ability to control how their data and devices are used.";
 
         tooltip.html([
             "<b style='text-shadow: 1px 1px 1px #000; color:",
             d.value.color,
             "'>", d.key, "</b>",
             "<hr>",
-            "Number of violations: <b>",
+            "Number of violations: ",
             d.value.now.length,
-            "</b>",
-            "Digital Right: <b>",
-            d.value.now.length,
-            "</b>"
+            "<br>",
+            "Digital Right: ",
+            text
         ].join(''));
         tooltip.style("display", "block");
         updateLegend();
@@ -1621,7 +1619,11 @@ var ONE_SECOND = 10,
             else {
                 res = [
                        "Link: ",
+                       "<a href=\"",
                        d.nodeValue['Product line'],
+                       "\" target=\"_blank\">",
+                       d.nodeValue['Product line'],
+                       "</a>"
                        //"</b>"
                    ];
                }
