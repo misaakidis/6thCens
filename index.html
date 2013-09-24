@@ -2012,12 +2012,13 @@ var ONE_SECOND = 1000*5,
 
     // return object country
     function initCounty(key, value) {
+    	debugger;
         var c = countries[key] || ( countries[key] = {        		
             key: key,
             name: value,
             shortName: value.split(',')[0],
-            //borrowed : 0,
-            //supplied : 0,
+            borrowed : 0,
+            supplied : 0,
             id: countriesCounter++,
             toString : function(full) {
                 return full ? this.name : this.shortName;
@@ -2203,6 +2204,7 @@ var ONE_SECOND = 1000*5,
             .scaleExtent([h / 6, h])
         ;
 
+        debugger;
         feature.attr("d", path);
 
         fsvg.selectAll("circle").remove();
