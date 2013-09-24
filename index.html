@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>World Bank Global Development Sprint</title>
+    <title>6thCens</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 </head>
     <!-- https://dl-web.dropbox.com/spa/6x4vg7uwuzglgh3/wbgds/public/index.html -->
@@ -713,6 +713,7 @@ var ONE_SECOND = 1000*5,
     }
 
     function getNodeFromPos(pos) {
+    	debugger;
         for (var i = nodes.length - 1; i >= 0; i--) {
             var d = nodes[i];
             if (d.visible && contain(d, pos))
@@ -796,6 +797,7 @@ var ONE_SECOND = 1000*5,
     }
 
     function getBase(d) {
+    	debugger;
         if (!d || !d.parent)
             return null;
 
@@ -827,8 +829,10 @@ var ONE_SECOND = 1000*5,
     }
 
     function initNodes(data) {
+    	debugger;
         var ns = [],
                 i, j, n, d, df;
+        debugger;
         parentHash = d3.map({});
         childHash = d3.map({});
         extHash = d3.map({});
@@ -841,6 +845,8 @@ var ONE_SECOND = 1000*5,
                 if (!d) continue;
                 d.nodes = [];
 
+                debugger;
+                
                 n = getBase(d);
                 d.parentNode = n;
                 !n.inserted && (n.inserted = ns.push(n));
@@ -1714,8 +1720,10 @@ var ONE_SECOND = 1000*5,
                 d3.select("body").style("cursor", "default");
             }
         }
-        else
+        else {
+        	debugger;
             d = getNodeFromPos(d3.mouse(item));
+        }
 
         if (d) {
             selected = d;
@@ -1886,6 +1894,7 @@ var ONE_SECOND = 1000*5,
 		
         links = d3.map({});
         regionLinks = [];
+        debugger;
         nodes = initNodes(_data);
 
         _force = (_force || d3.layout.force()
@@ -2003,12 +2012,12 @@ var ONE_SECOND = 1000*5,
 
     // return object country
     function initCounty(key, value) {
-        var c = countries[key] || ( countries[key] = {
+        var c = countries[key] || ( countries[key] = {        		
             key: key,
             name: value,
             shortName: value.split(',')[0],
-            borrowed : 0,
-            supplied : 0,
+            //borrowed : 0,
+            //supplied : 0,
             id: countriesCounter++,
             toString : function(full) {
                 return full ? this.name : this.shortName;
@@ -2078,8 +2087,10 @@ var ONE_SECOND = 1000*5,
         d.valueOf = value;
     	d.country1 = initCounty(d["CountryCode1"], d["Country1"]);
     	d.country2 = initCounty(d["CountryCode2"], d["Country2"]);
+    	d.borrower = initCounty(d["CountryCode1"], d["Country1"]);
+    	d.supplier = initCounty(d["CountryCode2"], d["Country2"]);
     	d.right = d["Right"];
-    	d.date = Date.parse(d['ReportedOn']);   	
+    	d.date = Date.parse(d['ReportedOn']);
     	return d;
     }
 
@@ -2204,7 +2215,7 @@ var ONE_SECOND = 1000*5,
             .attr("fill", "#fff")
             .attr("transform", ctr);
 
-        /*
+        
         vis.pb = vis.pb || (
             d3.select(document.body)
                 .append("div")
@@ -2218,7 +2229,7 @@ var ONE_SECOND = 1000*5,
         );
 
         vis.pb.width(w).height(18).textPosition("middle").max(0);
-		*/
+		
         
         imgPreloader.hide();
 
