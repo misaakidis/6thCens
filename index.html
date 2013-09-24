@@ -338,7 +338,7 @@
 })(window);
 
 var vis = {},
-    cat = 'Major Sector'
+    cat = 'Right'
     ;
 
 var setting = {
@@ -1587,6 +1587,38 @@ var ONE_SECOND = 1000*5,
     }
 
     var tooltip;
+    
+    function showToolTip(d) {
+        var res;
+        if (!d) {
+            tooltip.style("display", "none");
+            return;
+        }
+        if (tooltip.style("display") == "none") {
+            res = [];
+
+            if (d.type == typeNode.parent) {
+                res = [
+                    d.img && d.img.width > 0 && d.img.height > 0 ? d.img.outerHTML : "",
+                    " Country: <b>",
+                    d.nodeValue.shortName,
+                    "</b><br/>"
+                ];
+            }
+            else {
+                res = [
+                       "C: <b>",
+                       d.nodeValue.country1,
+                       "</b>"
+                   ];
+               }
+
+               tooltip.html(res.join(''));
+               tooltip.style("display", "block");
+           }
+       }
+
+/*
 
     function showToolTip(d) {
         var res;
@@ -1611,7 +1643,7 @@ var ONE_SECOND = 1000*5,
             }
             else {
                 res = [
-                    "Contract: <b>",
+                    "C: <b>",
                     d.nodeValue.contract.desc,
                     "</b><br/>Date: <b>",
                     shortTimeFormat(d.nodeValue.contract.date),
@@ -1655,6 +1687,8 @@ var ONE_SECOND = 1000*5,
             tooltip.style("display", "block");
         }
     }
+
+*/
 
     function moveToolTip(d, event) {
         event = event || d3.event;
@@ -1912,7 +1946,7 @@ var ONE_SECOND = 1000*5,
 (function() {
     var w, h,
         _data,
-        fy = 2013,
+        fy = 2006,
         div
     ;
 
@@ -2008,7 +2042,8 @@ var ONE_SECOND = 1000*5,
         }
         return countryByIndex[c.id] = c;
     }
-
+    
+    /*
     function initProcurement(d) {
         return {
             category : d['Procurement Category'],
@@ -2033,11 +2068,22 @@ var ONE_SECOND = 1000*5,
             }
         });
     }
+    */
 
     function value() {
         return this.basevalue || 0;
     }
+    
+    function initItem(d) {
+        d.valueOf = value;
+    	d.country1 = initCounty(d["CountryCode1"], d["Country1"]);
+    	d.country2 = initCounty(d["CountryCode2"], d["Country2"]);
+    	d.right = d["Right"];
+    	d.date = Date.parse(d['ReportedOn']);   	
+    	return d;
+    }
 
+    /*
     function initItem(d) {
         // Convert strings to numbers.
         d.value = d.basevalue = parseInt(d["Total Contract Amount (USD)"].substring(1));
@@ -2059,6 +2105,7 @@ var ONE_SECOND = 1000*5,
 
         return d;
     }
+    */
 
     function clone(d) {
         var newItem = {};
@@ -2072,7 +2119,7 @@ var ONE_SECOND = 1000*5,
     }
 
     function sortByCSD(a, b) {
-        return b.contract.date - a.contract.date;
+        return b.date - a.date;
     }
 
     var sizes = d3.scale.linear()
@@ -2157,7 +2204,7 @@ var ONE_SECOND = 1000*5,
             .attr("fill", "#fff")
             .attr("transform", ctr);
 
-        
+        /*
         vis.pb = vis.pb || (
             d3.select(document.body)
                 .append("div")
@@ -2171,7 +2218,8 @@ var ONE_SECOND = 1000*5,
         );
 
         vis.pb.width(w).height(18).textPosition("middle").max(0);
-
+		*/
+        
         imgPreloader.hide();
 
         setting.zoom = zoom;
@@ -2290,6 +2338,7 @@ var ONE_SECOND = 1000*5,
         fy = +param.year;
     }
 
+    /*
     d3.select("#fiscalYear")
         .on("change", function(d) {
             fy = +this.value;
@@ -2305,6 +2354,7 @@ var ONE_SECOND = 1000*5,
         .attr("value", function(d) { return d; })
         .text(function(d) { return d; })
     ;
+    */
 
     imgPreloader.show();
 
