@@ -85,7 +85,7 @@
 
     #info {
         right: 2px;
-        top: 2px;
+        bottom: 2px;
         z-index: 51;
         position: fixed;
     }
@@ -181,8 +181,8 @@
     #info li ul {
         display: none;
         border-radius: 0;
-        background: rgba(244, 244, 244, .6);
-        border: 1px dotted rgba(75, 75, 0, .8);
+        <!-- background: rgba(244, 244, 244, .6);
+        border: 1px dotted rgba(75, 75, 0, .8); -->
         color: #f9f9f9;
         text-shadow: 0 2px 2px rgba(0, 0, 0, .8);
     }
@@ -219,10 +219,12 @@
             <button id="btnPause" class="btn">▌▌Pause</button>
             <button id="btnStop" class="btn">█▌Stop</button>
         </li>
+        <!--
         <li>
             <label for="typeParam">Coloring by:</label>
             <select name="typeParam" id="typeParam"></select>
         </li>
+         -->
         <li>
             <!-- 
             <label for="fiscalYear">Fiscal year:</label>
@@ -234,9 +236,10 @@
     </ul>
 </div>
 
-<!--
+
 <div id="info">
     <ul>
+    <!--
         <li>Options
             <ul>
                 <li>
@@ -260,6 +263,7 @@
                     <label for="chTail">Fading tail</label>
                 </li>
             </ul>
+              -->
         </li>
         <li>Info
             <ul>
@@ -274,9 +278,9 @@
 						Version 33 at <a href="http://www.visualizing.org/sprint/global-development-sprint">World Bank Global Development Sprint</a>
                     </div>
                 </li>
-                <li style="background: rgba(0, 0, 0, .1); border: 1px dotted rgba(0, 0, 0, .3)">
+                <li>
                     <strong>What's going on</strong>
-                    <ol style="color: #d9d9d9;">
+                    <ol>
                         <li>• Each luminous particle is a contract. It moves from supplier to borrower.</li>
                         <li>• The size of particle depends of contract amount.</li>
                         <li>• Each node of country gathers contracts which it borrowed.</li>
@@ -285,9 +289,9 @@
                         <li>• The legend shows the number of contracts for all time separated by a selected criterion.</li>
                     </ol>
                 </li>
-                <li style="background: rgba(0, 0, 0, .2); border: 1px dotted rgba(0, 0, 0, .6)">
+                <li >
                     <strong>How to use:</strong>
-                    <ol style="color: #d9d9d9;">
+                    <ol>
                         <li>• Uses buttons for controlling process visualization.</li>
                         <li>• Uses select for choosing fiscal year or criteria of colouring.</li>
                         <li>• Uses mouse wheel for zooming.</li>
@@ -300,10 +304,10 @@
                 </li>
             </ul>
         </li>
-        <li><a href="http://selectel.ru/services/cloud/?ref_code=UVUS77Q88s64" style="display: block; overflow: hidden;  padding-top: 5px;"><img style="width:66px;" src="http://static.selectel.ru/partners/ref_white_88.png"></a></li>
+        <li>Report!</li>
     </ul>
 </div>
-!-->
+
 
 <script>
 "use strict";
@@ -385,7 +389,7 @@ var shortTimeFormat = (function() {
     }
 })();
 
-var ONE_SECOND = 1000*4,
+var ONE_SECOND = 1000*5,
     stepDate = 24 * 60 * 60 * 1000
 ;
 
@@ -1778,7 +1782,6 @@ var ONE_SECOND = 1000*4,
         layer = d3.select(dom.node().parentNode).append("div").attr("id", "s")
             .append("svg").attr('width', w).attr("height", h);
 
-        /*
         layer.append("g")
             .call(setting.zoom ? setting.zoom : zoom)
             .on('mousemove.tooltip', movem)
@@ -1789,7 +1792,6 @@ var ONE_SECOND = 1000*4,
             .attr("y", 0)
             .style("fill", "#ffffff")
             .style("fill-opacity", 0);
-        */
 
         lHis && lHis.selectAll("*").remove();
 
