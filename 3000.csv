@@ -1,3 +1,20 @@
 As of Date,Fiscal Year,Region,Borrower Country,Borrower Country Code,Project ID,Project Name,Procurement Type,Procurement Category,Procurement Method,Product line,WB Contract Number,Major Sector,Contract Description,Contract Signing Date,Supplier,Supplier Country,Supplier Country Code,Total Contract Amount (USD),Borrower Contract Reference Number
-12/18/2012 12:00:00 AM,2009,a,a,US,Pa,a,a,a,a,https://www.eff.org/deeplinks/2013/09/senate-revises-media-shield-law-better-its-still-imperfect,1,Expression,a,20/9/2013 12:00:00 AM,a,a,US,$1.00,a
-12/18/2012 12:00:00 AM,2009,a,a,US,Pa,a,a,a,a,test,2,Expression,a,20/9/2013 12:00:00 AM,a,a,US,$1.00,a
+12/18/2012 12:00:00 AM,2009,a,a,US,Pa,a,a,a,a,https://www.eff.org/deeplinks/2013/09/senate-revises-media-shield-law-better-its-still-imperfect,1,Privacy,a,22/9/2013 12:00:00 AM,a,a,US,$1.00,a
+12/18/2012 12:00:00 AM,2009,a,a,US,Pa,a,a,a,a,https://www.eff.org/deeplinks/2013/09/new-amicus-brief-urges-massachusetts-require-warrants-cell-site-data,2,Expression,a,20/9/2013 12:00:00 AM,a,a,GB,$1.00,a
+12/18/2012 12:00:00 AM,2009,a,a,US,Pa,a,a,a,a,https://www.eff.org/deeplinks/2013/09/united-nations-meets-thirteen-principles-against-unchecked-surveillance,3,Privacy,a,20/9/2013 12:00:00 AM,a,a,US,$1.00,a
+12/18/2012 12:00:00 AM,2009,a,a,US,Pa,a,a,a,a,https://www.eff.org/deeplinks/2013/09/when-startups-seek-patent-trolls-saviors-system-has-failed,4,Innovation,a,21/9/2013 12:00:00 AM,a,a,US,$1.00,a
+12/18/2012 12:00:00 AM,2009,a,a,CN,Pa,a,a,a,a,http://world.time.com/2013/06/19/viewpoint-why-surveillance-outrage-falls-flat-in-china/,5,Privacy,a,20/9/2013 12:00:00 AM,a,a,CN,$1.00,a
+12/18/2012 12:00:00 AM,2009,a,a,CN,Pa,a,a,a,a,http://www.theverge.com/2013/9/24/4765146/china-twitter-facebook-nyt-no-censorship-in-free-trade-zone,6,Expression,a,20/9/2013 12:00:00 AM,a,a,CN,$1.00,a
+12/18/2012 12:00:00 AM,2009,a,a,KE,Pa,a,a,a,a,http://www.ventures-africa.com/2013/06/72-of-kenyans-lack-internet-access/,7,Access,a,21/9/2013 12:00:00 AM,a,a,KE,$1.00,a
+12/18/2012 12:00:00 AM,2009,a,a,MA,Pa,a,a,a,a,https://www.eff.org/deeplinks/2013/09/critical-moroccan-editor-arrested-linking-youtube-video,8,Access,a,20/9/2013 12:00:00 AM,a,a,MA,$1.00,a
+12/18/2012 12:00:00 AM,2009,a,a,US,Pa,a,a,a,a,https://www.eff.org/deeplinks/2013/09/federal-courts-still-scaremongering-about-recap-and-spooky-open-source-software,9,Openness,a,20/9/2013 12:00:00 AM,a,a,US,$1.00,a
+12/18/2012 12:00:00 AM,2009,a,a,US,Pa,a,a,a,a,https://www.eff.org/deeplinks/2013/07/californias-open-access-bill-encounters-hurdle-gathers-support,10,Openness,a,20/9/2013 12:00:00 AM,a,a,US,$1.00,a
+12/18/2012 12:00:00 AM,2009,a,a,US,Pa,a,a,a,a,https://www.eff.org/deeplinks/2013/05/eff-fights-courtroom-shenanigans-after-wrongheaded-copyright-claim-blocks,11,Innovation,a,20/9/2013 12:00:00 AM,a,a,GE,$1.00,a
+12/18/2012 12:00:00 AM,2009,a,a,US,Pa,a,a,a,a,https://www.eff.org/deeplinks/2013/09/eff-and-app-developers-alliance-court-its-time-stop-lodsys,12,Access,a,20/9/2013 12:00:00 AM,a,a,US,$1.00,a
+12/18/2012 12:00:00 AM,2009,a,a,US,Pa,a,a,a,a,https://www.eff.org/deeplinks/2013/09/eff-and-app-developers-alliance-court-its-time-stop-lodsys,13,Access,a,21/9/2013 12:00:00 AM,a,a,US,$1.00,a
+12/18/2012 12:00:00 AM,2009,a,a,US,Pa,a,a,a,a,https://www.eff.org/deeplinks/2013/09/eff-and-app-developers-alliance-court-its-time-stop-lodsys,14,Access,a,21/9/2013 12:00:00 AM,a,a,US,$1.00,a
+12/18/2012 12:00:00 AM,2009,a,a,US,Pa,a,a,a,a,https://www.eff.org/deeplinks/2013/09/senate-revises-media-shield-law-better-its-still-imperfect,15,Privacy,a,22/9/2013 12:00:00 AM,a,a,US,$1.00,a
+12/18/2012 12:00:00 AM,2009,a,a,US,Pa,a,a,a,a,https://www.eff.org/deeplinks/2013/09/new-amicus-brief-urges-massachusetts-require-warrants-cell-site-data,16,Expression,a,22/9/2013 12:00:00 AM,a,a,US,$1.00,a
+12/18/2012 12:00:00 AM,2009,a,a,US,Pa,a,a,a,a,https://www.eff.org/deeplinks/2013/09/united-nations-meets-thirteen-principles-against-unchecked-surveillance,17,Privacy,a,22/9/2013 12:00:00 AM,a,a,US,$1.00,a
+12/18/2012 12:00:00 AM,2009,a,a,US,Pa,a,a,a,a,https://www.eff.org/deeplinks/2013/09/when-startups-seek-patent-trolls-saviors-system-has-failed,18,Innovation,a,21/9/2013 12:00:00 AM,a,a,US,$1.00,a
+12/18/2012 12:00:00 AM,2009,a,a,CN,Pa,a,a,a,a,http://world.time.com/2013/06/19/viewpoint-why-surveillance-outrage-falls-flat-in-china/,19,Privacy,a,20/9/2013 12:00:00 AM,a,a,CN,$1.00,a
