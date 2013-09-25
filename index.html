@@ -200,6 +200,13 @@
     #info li:hover ul {
         display: block;
     }
+    
+    .article_img {
+    	top:0px;
+  		float:right;
+  		width:50px;
+  		z-index: 998;
+	}
 </style>
 
 <body>
@@ -208,8 +215,6 @@
 <script charset="utf-8" src="https://rawgithub.com/artzub/dbsv/master/progressbar.js"></script>
 <script charset="utf-8" src="https://rawgithub.com/artzub/dbsv/master/tooltip.js"></script>
 <script charset="utf-8" src="https://rawgithub.com/artzub/wbgds/smy/wbc.js"></script>
-
-
 
 <div id="menu">
     <ul>
@@ -235,6 +240,11 @@
         </li>
     </ul>
 </div>
+
+
+<div class="article_img">
+    <img src="cens.png" width="50" height="50">
+</div> 
 
 
 <div id="info">
@@ -389,7 +399,7 @@ var shortTimeFormat = (function() {
     }
 })();
 
-var ONE_SECOND = 10,
+var ONE_SECOND = 1000,
     stepDate = 24 * 60 * 60 * 1000
 ;
 
@@ -1613,7 +1623,9 @@ var ONE_SECOND = 10,
                     //d.img && d.img.width > 0 && d.img.height > 0 ? d.img.outerHTML : "",
                     " Country Code: <b>",
                     d.nodeValue.key,
-                    "</b><br/>"
+                    "</b></br>Reports: ",
+                    th(d.nodeValue.supplied + d.nodeValue.borrowed),
+                    "<br/>"
                 ];
             }
             else {
@@ -1962,7 +1974,7 @@ var ONE_SECOND = 10,
 (function() {
     var w, h,
         _data,
-        fy = 2007,
+        fy = 3000,
         div
     ;
 
@@ -2112,9 +2124,10 @@ var ONE_SECOND = 10,
     	//d.country2 = initCounty(d["CountryCode2"], d["Country2"]);
     	//d.right = "Test";
         d.borrower = initCounty(d["Borrower Country Code"], d["Borrower Country"]);
-        d.borrower.borrowed += d.value;
+        d.borrower.borrowed += 1;
         d.supplier = initCounty(d["Supplier Country Code"], d["Supplier Country"]);
-        d.supplier.supplied += d.value;
+        if(d.supplier.name.localeCompare(d.borrower.name)) 
+        	d.supplied += 1;
         d.sector = d["Major Sector"];
         d.product = d['Product line'];
         d.procurement = initProcurement(d);
